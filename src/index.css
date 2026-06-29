@@ -201,3 +201,8 @@ body.mobile-menu-open footer {
   visibility: hidden;
 }
 
+/* ── Mobile Menu: always white text on dark glass bg ── */
+.mobile-nav-link {
+  color: #ffffff !important;
+}
+
