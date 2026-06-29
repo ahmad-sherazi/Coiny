@@ -121,13 +121,6 @@ export function ShowcaseSection() {
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            src={mobileImg} 
-            className="w-[85%] drop-shadow-2xl object-contain"
-          />
-          <motion.img 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             src={leftTopImg} 
             className="w-[90%] drop-shadow-xl rounded-[2rem]"
           />
