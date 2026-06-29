@@ -20,17 +20,35 @@ export function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Lock body scroll and toggle visibility when mobile menu is open
+  // Lock body scroll when mobile menu is open — iOS-safe approach
   useEffect(() => {
     if (isMobileMenuOpen) {
+      // Save current scroll position and lock body using position:fixed (works on iOS)
+      const scrollY = window.scrollY;
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.left = '0';
+      document.body.style.right = '0';
       document.body.style.overflow = 'hidden';
       document.body.classList.add('mobile-menu-open');
     } else {
-      document.body.style.overflow = 'unset';
+      // Restore scroll position when menu closes
+      const scrollY = document.body.style.top;
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
       document.body.classList.remove('mobile-menu-open');
+      // Restore the exact scroll position without visible jump
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.position = '';
+      document.body.style.top = '';
+      document.body.style.left = '';
+      document.body.style.right = '';
+      document.body.style.overflow = '';
       document.body.classList.remove('mobile-menu-open');
     };
   }, [isMobileMenuOpen]);
@@ -91,7 +109,7 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 w-full h-[100dvh] bg-glass-bg backdrop-blur-xl z-[100] flex flex-col"
+            className="fixed inset-0 w-full h-[100dvh] overflow-hidden touch-none bg-glass-bg backdrop-blur-xl z-[100] flex flex-col"
           >
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-glass-text/10">
@@ -109,15 +127,26 @@ export function Navbar() {
             </div>
 
             {/* Mobile Menu Links */}
-            <div className="flex-1 flex flex-col px-6 py-8 gap-4 overflow-y-auto">
+            <div className="flex-1 flex flex-col px-6 py-8 gap-4">
               {NAV_LINKS.map((link, i) => (
-                <motion.a 
+                <motion.a
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + (i * 0.1) }}
-                  key={link.id} 
-                  href={link.href} 
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  key={link.id}
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsMobileMenuOpen(false);
+                    // Wait for menu exit animation (350ms) then scroll
+                    setTimeout(() => {
+                      const hash = link.href.includes('#') ? link.href.split('#')[1] : null;
+                      if (hash) {
+                        const el = document.getElementById(hash);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }, 350);
+                  }}
                   className="text-xl font-medium text-glass-text/90 hover:text-green transition-colors py-2 border-b border-glass-text/5"
                 >
                   {link.label}
