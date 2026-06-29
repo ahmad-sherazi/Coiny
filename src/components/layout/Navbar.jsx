@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ThemeToggle } from '../ui/ThemeToggle';
 import { Button } from '../ui/Button';
 import { Layers, Menu, X } from 'lucide-react';
@@ -19,25 +20,28 @@ export function Navbar() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Lock body scroll when mobile menu is open
+  // Lock body scroll and toggle visibility when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('mobile-menu-open');
     } else {
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-open');
     }
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-open');
     };
   }, [isMobileMenuOpen]);
 
   return (
     <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-8 py-6 backdrop-blur-md border-b border-border/50">
       {/* Brand Logo */}
-      <a href="#" className="flex items-center gap-2">
+      <Link to="/" className="flex items-center gap-2">
         <Layers className="text-green w-8 h-8" />
         <span className="text-ink font-bold text-xl tracking-tight">{BRAND.name}</span>
-      </a>
+      </Link>
 
       {/* Desktop Nav Links */}
       <div className="hidden md:flex items-center gap-8 text-sm font-medium text-muted h-full">
@@ -57,12 +61,16 @@ export function Navbar() {
       <div className="flex items-center gap-4">
         <ThemeToggle />
         <div className="hidden md:flex items-center gap-2">
-          <Button variant="outline" className="rounded-full px-5 py-2">
-            {NAV_CTA.login.label}
-          </Button>
-          <Button variant="primary" className="rounded-full px-5 py-2">
-            {NAV_CTA.signup.label}
-          </Button>
+          <Link to="/login">
+            <Button variant="outline" className="rounded-full px-5 py-2">
+              {NAV_CTA.login.label}
+            </Button>
+          </Link>
+          <Link to="/signup">
+            <Button variant="primary" className="rounded-full px-5 py-2">
+              {NAV_CTA.signup.label}
+            </Button>
+          </Link>
         </div>
         
         {/* Hamburger Icon (Mobile) */}
@@ -87,10 +95,10 @@ export function Navbar() {
           >
             {/* Mobile Menu Header */}
             <div className="flex items-center justify-between px-6 py-6 border-b border-glass-text/10">
-              <a href="#" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link to="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                 <Layers className="text-green w-7 h-7" />
                 <span className="text-glass-text font-bold text-lg tracking-tight">{BRAND.name}</span>
-              </a>
+              </Link>
               <button 
                 className="p-2 text-glass-text hover:text-green transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -124,20 +132,22 @@ export function Navbar() {
               transition={{ delay: 0.3 }}
               className="px-6 pb-12 flex flex-col gap-4 mt-auto"
             >
-              <Button 
-                variant="outline" 
-                className="w-full rounded-full py-3 text-base border-glass-text/20 text-glass-text hover:bg-glass-text/10" 
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {NAV_CTA.login.label}
-              </Button>
-              <Button 
-                variant="primary" 
-                className="w-full rounded-full py-3 text-base bg-green hover:bg-green-mid text-ink font-semibold border-none" 
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {NAV_CTA.signup.label}
-              </Button>
+              <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full rounded-full py-3 text-base border-glass-text/20 text-glass-text hover:bg-glass-text/10" 
+                >
+                  {NAV_CTA.login.label}
+                </Button>
+              </Link>
+              <Link to="/signup" onClick={() => setIsMobileMenuOpen(false)} className="w-full">
+                <Button 
+                  variant="primary" 
+                  className="w-full rounded-full py-3 text-base bg-green hover:bg-green-mid text-ink font-semibold border-none" 
+                >
+                  {NAV_CTA.signup.label}
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
         )}

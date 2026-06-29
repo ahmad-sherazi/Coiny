@@ -56,11 +56,11 @@ export function IncomeHub() {
            className="flex flex-col md:flex-row items-center justify-between gap-16 md:gap-8"
         >
           {/* Left Side Content */}
-          <div className="flex-1 max-w-lg z-20 w-full relative">
+          <div className="flex-1 max-w-lg z-20 w-full relative flex flex-col items-center md:items-start text-center md:text-left mx-auto md:mx-0">
             {/* Green Icon Box */}
             <motion.div 
               variants={iconVariants}
-              className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#48d16f] to-[#36b059] rounded-[1.25rem] flex items-center justify-center text-pure-white mb-6 shadow-[0_12px_30px_rgba(72,209,111,0.25)]"
+              className="w-14 h-14 md:w-16 md:h-16 bg-gradient-to-br from-[#48d16f] to-[#36b059] rounded-[1.25rem] flex items-center justify-center text-pure-white mb-6 shadow-[0_12px_30px_rgba(72,209,111,0.25)] mx-auto md:mx-0"
             >
               <Sparkles size={28} className="text-pure-white fill-pure-white" strokeWidth={1.5} />
             </motion.div>
@@ -68,7 +68,7 @@ export function IncomeHub() {
             {/* Heading */}
             <motion.h2 
               variants={headingVariants}
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-sans tracking-tight font-medium text-pure-white mb-4 leading-tight"
+              className="text-4xl md:text-5xl lg:text-[3.5rem] font-sans tracking-tight font-medium text-pure-white mb-4 leading-tight text-center md:text-left"
             >
               {INCOME_HUB_TEXT.title}
             </motion.h2>
@@ -76,7 +76,7 @@ export function IncomeHub() {
             {/* Description Text */}
             <motion.p 
               variants={textVariants}
-              className="text-navy-muted text-[15px] md:text-[17px] leading-relaxed max-w-[360px]"
+              className="text-navy-muted text-[15px] md:text-[17px] leading-relaxed max-w-[360px] text-center md:text-left mx-auto md:mx-0"
             >
               {INCOME_HUB_TEXT.description}
             </motion.p>
@@ -89,16 +89,6 @@ export function IncomeHub() {
               src={mobileImg} 
               alt="Income Hub Mobile View" 
               className="w-full max-w-[320px] lg:max-w-[380px] object-contain drop-shadow-2xl rounded-[2.5rem] lg:rounded-[3rem]"
-            />
-          </div>
-          
-          {/* Right Side Image (Static on mobile) */}
-          <div className="md:hidden flex-1 flex justify-center w-full relative z-20">
-            <motion.img 
-              variants={mobileVariants}
-              src={mobileImg} 
-              alt="Income Hub Mobile View" 
-              className="w-full max-w-[180px] object-contain drop-shadow-2xl -my-12 rounded-[2.5rem]"
             />
           </div>
         </motion.div>

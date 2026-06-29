@@ -9,10 +9,10 @@ export const BRAND = {
 };
 
 export const NAV_LINKS = [
-  { id: 'nav-service',  label: 'Service',   href: '#pic2' },
-  { id: 'nav-resource', label: 'Resource',  href: '#pic3' },
-  { id: 'nav-company',  label: 'Company',   href: '#pic4' },
-  { id: 'nav-premium',  label: 'Premium',   href: '#pricing' },
+  { id: 'nav-service',  label: 'Service',   href: '/#pic2' },
+  { id: 'nav-resource', label: 'Resource',  href: '/#pic3' },
+  { id: 'nav-company',  label: 'Company',   href: '/#pic4' },
+  { id: 'nav-premium',  label: 'Premium',   href: '/#pricing' },
 ];
 
 export const NAV_CTA = {

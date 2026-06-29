@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { PRICING_TEXT } from '../../constants/pricing';
 import { Check } from 'lucide-react';
@@ -145,9 +146,11 @@ export function Pricing() {
                       <span className="text-white/70 font-light mb-2">{PRICING_TEXT.premiumPlan.duration}</span>
                     </div>
                   </div>
-                  <button className="bg-[#48d16f] hover:bg-[#36b059] transition-colors text-white font-medium py-3 px-6 rounded-full shadow-[0_8px_20px_rgba(72,209,111,0.3)] w-fit mt-4">
-                    {PRICING_TEXT.premiumPlan.buttonText}
-                  </button>
+                  <Link to="/signup">
+                    <button className="bg-[#48d16f] hover:bg-[#36b059] transition-colors text-white font-medium py-3 px-6 rounded-full shadow-[0_8px_20px_rgba(72,209,111,0.3)] w-fit mt-4 cursor-pointer">
+                      {PRICING_TEXT.premiumPlan.buttonText}
+                    </button>
+                  </Link>
                 </motion.div>
 
                 {/* Right Side (Staggered Features List) */}
@@ -175,13 +178,15 @@ export function Pricing() {
             transition={{ delay: 3.5, duration: 0.6 }}
             className="mt-16"
           >
-            <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-900 font-medium px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm">
-              {PRICING_TEXT.customPlan.text}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12h14"></path>
-                <path d="M12 5l7 7-7 7"></path>
-              </svg>
-            </button>
+            <Link to="/signup">
+              <button className="flex items-center gap-2 bg-white border border-gray-200 text-gray-900 font-medium px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors shadow-sm cursor-pointer">
+                {PRICING_TEXT.customPlan.text}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12h14"></path>
+                  <path d="M12 5l7 7-7 7"></path>
+                </svg>
+              </button>
+            </Link>
           </motion.div>
 
         </motion.div>
