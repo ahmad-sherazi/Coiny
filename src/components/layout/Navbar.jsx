@@ -112,13 +112,13 @@ export function Navbar() {
             className="fixed inset-0 w-full h-[100dvh] overflow-hidden touch-none bg-glass-bg backdrop-blur-xl z-[100] flex flex-col"
           >
             {/* Mobile Menu Header */}
-            <div className="flex items-center justify-between px-6 py-6 border-b border-glass-text/10">
+            <div className="flex items-center justify-between px-6 py-6 border-b border-white/10">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                 <Layers className="text-green w-7 h-7" />
-                <span className="text-glass-text font-bold text-lg tracking-tight">{BRAND.name}</span>
+                <span className="text-white font-bold text-lg tracking-tight">{BRAND.name}</span>
               </Link>
               <button 
-                className="p-2 text-glass-text hover:text-green transition-colors"
+                className="p-2 text-white hover:text-green transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-label="Close mobile menu"
               >
@@ -135,10 +135,10 @@ export function Navbar() {
                   transition={{ delay: 0.1 + (i * 0.1) }}
                   key={link.id}
                   href={link.href}
+                  style={{ color: '#ffffff' }}
                   onClick={(e) => {
                     e.preventDefault();
                     setIsMobileMenuOpen(false);
-                    // Wait for menu exit animation (350ms) then scroll
                     setTimeout(() => {
                       const hash = link.href.includes('#') ? link.href.split('#')[1] : null;
                       if (hash) {
@@ -147,7 +147,7 @@ export function Navbar() {
                       }
                     }, 350);
                   }}
-                  className="text-xl font-medium text-glass-text/90 hover:text-green transition-colors py-2 border-b border-glass-text/5"
+                  className="mobile-nav-link text-xl font-semibold hover:text-green transition-colors py-3 border-b border-white/10"
                 >
                   {link.label}
                 </motion.a>
@@ -164,7 +164,7 @@ export function Navbar() {
               <Link to="/login" onClick={() => setIsMobileMenuOpen(false)} className="w-full">
                 <Button 
                   variant="outline" 
-                  className="w-full rounded-full py-3 text-base border-glass-text/20 text-glass-text hover:bg-glass-text/10" 
+                  className="w-full rounded-full py-3 text-base border-white/30 text-white hover:bg-white/10 bg-white/5" 
                 >
                   {NAV_CTA.login.label}
                 </Button>
